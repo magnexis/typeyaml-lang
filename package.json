@@ -4,7 +4,7 @@
   "private": false,
   "description": "The official typeYAML compiler, CLI, SDK, and typed configuration toolchain for YAML and JSON.",
   "type": "module",
-  "files": ["dist", "assets/typeyaml-logo.png", "README.md"],
+  "files": ["bin", "dist", "assets/typeyaml-logo.png", "README.md", "LICENSE"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/magnexis/typeyaml-lang.git"
@@ -24,7 +24,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" } },
-  "bin": { "taml": "./dist/cli/index.js", "tyaml": "./dist/cli/index.js" },
+  "bin": { "taml": "bin/taml.mjs", "tyaml": "bin/taml.mjs" },
   "scripts": {
     "build": "node scripts/clean-dist.mjs && tsup src/index.ts --format esm,cjs --dts --out-dir dist && tsup src/cli/index.ts --format esm --out-dir dist/cli && node scripts/copy-stdlib.mjs",
     "clean:examples": "node scripts/clean-examples.mjs",

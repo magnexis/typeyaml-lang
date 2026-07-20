@@ -1,7 +1,7 @@
 {
     "version":  "1.0.0",
     "platform":  "windows-x64",
-    "generatedAt":  "2026-07-20T17:48:42.8649420Z",
+    "generatedAt":  "2026-07-20T17:53:17.3363934Z",
     "artifacts":  [
                       {
                           "path":  "README.md",
@@ -20,8 +20,8 @@
                       },
                       {
                           "path":  "typeyaml-v1.0.0.tgz",
-                          "bytes":  842511,
-                          "sha256":  "97d1fd4cc43e0a7081e5eb82c9d5408f0ca9af25482d25d9bcf9fd7c5a40f36b"
+                          "bytes":  842658,
+                          "sha256":  "ab634e545e47ff7dcd1ae82b3fb6fdaa86cb623e71304421d25f0011b6652b36"
                       },
                       {
                           "path":  "typeyaml-v1.0.0.vsix",
