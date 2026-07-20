@@ -1,5 +1,9 @@
 # typeYAML for Visual Studio Code
 
+<p align="center">
+  <img src="images/typeyaml-logo.png" alt="typeYAML logo" width="260">
+</p>
+
 The official VS Code extension for `.taml` files. It provides language recognition, TextMate syntax highlighting, and an LSP client for diagnostics, completion, hover details, go-to-definition, rename, and semantic tokens.
 
 ## Develop or package

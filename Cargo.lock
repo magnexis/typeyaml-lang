@@ -1093,7 +1093,7 @@ dependencies = [
 
 [[package]]
 name = "taml"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "clap",
  "serde_json",
@@ -1104,7 +1104,7 @@ dependencies = [
 
 [[package]]
 name = "taml-core"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "regex",
  "serde",
@@ -1117,7 +1117,7 @@ dependencies = [
 
 [[package]]
 name = "taml-fmt"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "serde",
  "taml-core",
@@ -1125,7 +1125,7 @@ dependencies = [
 
 [[package]]
 name = "taml-lsp"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "dashmap 6.2.1",
  "serde_json",
@@ -1297,7 +1297,7 @@ checksum = "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20"
 
 [[package]]
 name = "typeyaml-napi"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "napi",
  "napi-build",
@@ -1308,7 +1308,7 @@ dependencies = [
 
 [[package]]
 name = "typeyaml-wasm"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "serde-wasm-bindgen",
  "taml-core",

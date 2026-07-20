@@ -1,0 +1,7 @@
+d46aebacf274fe61adcbafa1a44de541aeeb7d2f98d3f1b2feffdf8108a37ffb  RELEASE_NOTES.md
+47911f440be36627969eb2c25b1c5b51a88a5e76a1d0a799ce5d9726dcbe0df1  typeyaml-docs-v1.0.1-windows-x64.zip
+0f65a94f5a74f85a2f4dd21119cc71b05bd8c767825d9a7fb3b85449f27ad8b8  typeyaml-napi-v1.0.1-windows-x64.zip
+b525e187a6f3543533412c037e5cd9137cca52445607ef256af14ec925406315  typeyaml-v1.0.1.tgz
+366f012071599e83227dafa58288b3c73d549c2b7eba423dd4f12d1673c6ffa8  typeyaml-v1.0.1.vsix
+9f5b2331c6d7035684bf19c4dea0fad23ab744cfef2f7a923995f6420adb6bf1  typeyaml-v1.0.1-windows-x64.zip
+776c30a5aaaae0774fa700ebd4767d0487f1a9e3eead019c0059b7f4a76bb33e  typeyaml-wasm-v1.0.1.zip

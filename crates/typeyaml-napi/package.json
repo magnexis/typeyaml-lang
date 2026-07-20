@@ -1,6 +1,6 @@
 {
   "name": "@typeyaml/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Native Rust compiler core for typeYAML.",
   "main": "index.cjs",
   "types": "index.d.ts",

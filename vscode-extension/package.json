@@ -2,8 +2,9 @@
   "name": "typeyaml-vscode",
   "displayName": "typeYAML",
   "description": "Language support for typed YAML (.taml): highlighting, diagnostics, completion, and navigation.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "magnificent-language",
+  "icon": "images/typeyaml-logo.png",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",

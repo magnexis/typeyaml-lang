@@ -5,7 +5,7 @@
 <p align="center"><strong>Typed. Structured. Human.</strong></p>
 
 <p align="center">
-  <img src="assets/badges/version.svg" alt="Version 1.0.0">
+  <img src="assets/badges/version.svg" alt="Version 1.0.1">
   <img src="assets/badges/status.svg" alt="Project status: active">
   <img src="assets/badges/native.svg" alt="Native engine: Rust and Wasm">
   <a href="docs/index.md"><img src="assets/badges/docs.svg" alt="Documentation: VitePress"></a>

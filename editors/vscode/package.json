@@ -2,7 +2,7 @@
   "name": "typeyaml-vscode",
   "displayName": "typeYAML",
   "description": "Syntax highlighting for typeYAML (.taml) files.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "typeyaml",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./extension.cjs",
