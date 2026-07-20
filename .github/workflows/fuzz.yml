@@ -1,0 +1,16 @@
+name: Native Parser Fuzzing
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo install cargo-fuzz --locked
+      - run: cargo fuzz run compile -- -runs=10000
+        working-directory: crates/taml-core/fuzz

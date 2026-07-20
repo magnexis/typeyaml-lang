@@ -1,0 +1,1 @@
+{ "name": "@typeyaml/core-darwin-x64", "version": "1.0.0", "os": ["darwin"], "cpu": ["x64"], "main": "typeyaml.darwin-x64.node", "files": ["typeyaml.darwin-x64.node"] }

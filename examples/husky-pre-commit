@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# Copy to .husky/pre-commit in a consumer project, then make it executable.
+set -eu
+
+changed_files=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.taml$' || true)
+[ -z "$changed_files" ] && exit 0
+
+printf '%s\n' "$changed_files" | while IFS= read -r file; do
+  npx taml check "$file"
+done

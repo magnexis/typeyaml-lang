@@ -1,0 +1,31 @@
+{
+  "name": "typeyaml",
+  "version": "1.0.0",
+  "private": true,
+  "description": "typeYAML — Typed. Structured. Human. A typed compiler for YAML and JSON.",
+  "type": "module",
+  "files": ["dist", "assets/typeyaml-logo.png", "README.md"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" } },
+  "bin": { "taml": "./dist/cli/index.js", "tyaml": "./dist/cli/index.js" },
+  "scripts": {
+    "build": "node scripts/clean-dist.mjs && tsup src/index.ts --format esm,cjs --dts --out-dir dist && tsup src/cli/index.ts --format esm --out-dir dist/cli && node scripts/copy-stdlib.mjs",
+    "clean:examples": "node scripts/clean-examples.mjs",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "example": "npm run build && node dist/cli/index.js build examples/payment-api.tyaml -o generated",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "native:check": "cargo check --workspace",
+    "native:test": "cargo test -p taml-core",
+    "native:build": "cargo build --release -p taml",
+    "native:wasm": "wasm-pack build crates/typeyaml-wasm --target web --out-dir pkg",
+    "native:benchmark": "powershell -ExecutionPolicy Bypass -File scripts/benchmark-native.ps1"
+  },
+  "dependencies": { "commander": "^13.1.0", "yaml": "^2.7.1" },
+  "optionalDependencies": { "@typeyaml/core": "1.0.0" },
+  "devDependencies": { "@types/node": "^22.15.3", "tsup": "^8.5.0", "typescript": "^5.8.3", "vitepress": "^1.6.3", "vitest": "^3.2.4" }
+}

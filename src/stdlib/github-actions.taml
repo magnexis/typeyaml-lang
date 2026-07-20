@@ -1,0 +1,14 @@
+# GitHub Actions workflow schemas (flat MVP workflow fields)
+interface Workflow:
+  name: String
+  on: String
+  runsOn: String = "ubuntu-latest"
+
+interface Job:
+  name: String
+  runsOn: String = "ubuntu-latest"
+  command: String
+
+interface Step:
+  name: String
+  run: String

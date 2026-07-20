@@ -1,0 +1,9 @@
+[package]
+name = "taml-fmt"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+taml-core = { path = "../taml-core" }
+serde = { version = "1.0", features = ["derive"] }

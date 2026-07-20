@@ -1,0 +1,15 @@
+changelog:
+  categories:
+    - title: Breaking changes
+      labels: ["breaking-change"]
+    - title: New features
+      labels: ["feature", "enhancement"]
+    - title: Fixes
+      labels: ["bug"]
+    - title: Documentation and developer experience
+      labels: ["documentation", "dx"]
+    - title: Internal changes
+      labels: ["chore", "dependencies"]
+  exclude:
+    labels: ["skip-changelog"]
+    authors: ["dependabot[bot]"]

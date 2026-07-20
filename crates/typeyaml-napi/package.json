@@ -1,0 +1,13 @@
+{
+  "name": "@typeyaml/core",
+  "version": "1.0.0",
+  "description": "Native Rust compiler core for typeYAML.",
+  "main": "index.cjs",
+  "types": "index.d.ts",
+  "napi": {
+    "binaryName": "typeyaml",
+    "targets": ["x86_64-pc-windows-msvc", "x86_64-unknown-linux-gnu", "aarch64-apple-darwin", "x86_64-apple-darwin"]
+  },
+  "scripts": { "build": "napi build --platform --release", "artifacts": "napi artifacts" },
+  "devDependencies": { "@napi-rs/cli": "^3.0.0" }
+}

@@ -1,0 +1,6 @@
+{
+  "registry": {
+    "requireHttps": true,
+    "allowedHosts": [ "raw.githubusercontent.com"]
+  }
+}

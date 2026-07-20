@@ -1,0 +1,24 @@
+name: TypeYAML
+description: Validate, lint, and format TypeYAML files in GitHub Actions.
+inputs:
+  format-check:
+    description: Run taml fmt --check for changed files.
+    required: false
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - uses: dtolnay/rust-toolchain@stable
+    - shell: bash
+      run: |
+        cargo install --path "$GITHUB_ACTION_PATH/../cli-rust" --root "$RUNNER_TEMP/typeyaml"
+        echo "$RUNNER_TEMP/typeyaml/bin" >> "$GITHUB_PATH"
+    - shell: bash
+      run: |
+        files=$(git ls-files '*.taml')
+        [ -z "$files" ] && exit 0
+        for file in $files; do
+          taml check "$file"
+          taml lint "$file"
+          if [ "${{ inputs.format-check }}" = "true" ]; then taml fmt "$file" --check; fi
+        done

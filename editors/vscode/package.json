@@ -1,0 +1,28 @@
+{
+  "name": "typeyaml-vscode",
+  "displayName": "typeYAML",
+  "description": "Syntax highlighting for typeYAML (.taml) files.",
+  "version": "1.0.0",
+  "publisher": "typeyaml",
+  "main": "./extension.cjs",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Programming Languages"],
+  "activationEvents": ["onLanguage:taml"],
+  "configuration": {
+    "title": "typeYAML",
+    "properties": {
+      "typeyaml.languageServer.path": {
+        "type": "string",
+        "default": "taml-lsp",
+        "description": "Path to the standalone taml-lsp executable."
+      }
+    }
+  },
+  "contributes": {
+    "languages": [{ "id": "taml", "aliases": ["typeYAML", "TAML"], "extensions": [".taml"], "icon": { "light": "./images/typeyaml-logo.png", "dark": "./images/typeyaml-logo.png" } }],
+    "grammars": [{ "language": "taml", "scopeName": "source.taml", "path": "./syntaxes/taml.tmLanguage.json" }]
+  },
+  "dependencies": { "vscode-languageclient": "^9.0.1" },
+  "scripts": { "package": "npx @vscode/vsce package --out typeyaml.vsix" },
+  "devDependencies": { "@types/vscode": "^1.85.0", "@vscode/vsce": "^3.2.1" }
+}

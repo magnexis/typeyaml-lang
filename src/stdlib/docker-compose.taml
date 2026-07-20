@@ -1,0 +1,6 @@
+# Docker Compose service schema (flat MVP service fields)
+interface ComposeService:
+  image: String
+  containerName?: String
+  port: Int(min: 1, max: 65535)
+  restart?: "no" | "always" | "unless-stopped" = "unless-stopped"

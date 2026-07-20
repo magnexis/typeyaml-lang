@@ -1,0 +1,252 @@
+name: Release TypeYAML
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing vX.Y.Z tag to release
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+
+jobs:
+  verify-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+      - name: Verify the tag matches every public package version
+        run: |
+          node -e "const fs=require('fs'); const tag=process.env.RELEASE_TAG.slice(1); for (const file of ['package.json','vscode-extension/package.json','crates/typeyaml-napi/package.json']) { const version=JSON.parse(fs.readFileSync(file)).version; if (version !== tag) throw new Error(file + ' is ' + version + ', expected ' + tag); }"
+
+  npm-package:
+    needs: verify-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Pack the Node.js SDK and CLI wrapper
+        run: |
+          mkdir release
+          npm pack --pack-destination release
+          mv release/*.tgz "release/typeyaml-${RELEASE_TAG}.tgz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-package
+          path: release/*
+          if-no-files-found: error
+
+  native-cli:
+    needs: verify-version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            archive: tar.gz
+            cross: false
+          - runner: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            archive: tar.gz
+            cross: true
+          - runner: macos-13
+            target: x86_64-apple-darwin
+            archive: tar.gz
+            cross: false
+          - runner: macos-latest
+            target: aarch64-apple-darwin
+            archive: tar.gz
+            cross: false
+          - runner: windows-latest
+            target: x86_64-pc-windows-msvc
+            archive: zip
+            cross: false
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - if: matrix.cross
+        uses: taiki-e/install-action@cross
+      - name: Build the standalone CLI
+        shell: bash
+        run: |
+          if [ "${{ matrix.cross }}" = "true" ]; then
+            cross build --release -p taml --target ${{ matrix.target }}
+          else
+            cargo build --release -p taml --target ${{ matrix.target }}
+          fi
+      - name: Archive Unix CLI
+        if: matrix.archive == 'tar.gz'
+        shell: bash
+        run: |
+          mkdir release
+          tar -C target/${{ matrix.target }}/release -czf "release/typeyaml-${RELEASE_TAG}-${{ matrix.target }}.tar.gz" taml
+      - name: Archive Windows CLI
+        if: matrix.archive == 'zip'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release | Out-Null
+          Compress-Archive -LiteralPath target/${{ matrix.target }}/release/taml.exe -DestinationPath "release/typeyaml-$env:RELEASE_TAG-${{ matrix.target }}.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cli-${{ matrix.target }}
+          path: release/*
+          if-no-files-found: error
+
+  napi-bindings:
+    needs: verify-version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            target: x86_64-pc-windows-msvc
+          - runner: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - runner: macos-13
+            target: x86_64-apple-darwin
+          - runner: macos-latest
+            target: aarch64-apple-darwin
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: npm install
+        working-directory: crates/typeyaml-napi
+      - run: npx napi build --release --target ${{ matrix.target }} --platform
+        working-directory: crates/typeyaml-napi
+      - name: Archive native Node binding
+        shell: bash
+        run: |
+          mkdir release
+          (cd crates/typeyaml-napi && tar -czf "../../release/typeyaml-napi-${RELEASE_TAG}-${{ matrix.target }}.tar.gz" ./*.node)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: napi-${{ matrix.target }}
+          path: release/*
+          if-no-files-found: error
+
+  wasm-package:
+    needs: verify-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: wasm32-unknown-unknown }
+      - uses: jetli/wasm-pack-action@v0.4.0
+      - run: wasm-pack build crates/typeyaml-wasm --target web --out-dir pkg
+      - name: Archive browser package
+        run: |
+          mkdir release
+          tar -C crates/typeyaml-wasm -czf "release/typeyaml-wasm-${RELEASE_TAG}.tar.gz" pkg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wasm-package
+          path: release/*
+          if-no-files-found: error
+
+  vscode-extension:
+    needs: verify-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm, cache-dependency-path: vscode-extension/package-lock.json }
+      - run: npm ci
+        working-directory: vscode-extension
+      - run: npm run package
+        working-directory: vscode-extension
+      - run: mv vscode-extension/typeyaml.vsix "vscode-extension/typeyaml-${RELEASE_TAG}.vsix"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vscode-extension
+          path: vscode-extension/typeyaml-*.vsix
+          if-no-files-found: error
+
+  documentation:
+    needs: verify-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run docs:build
+      - run: |
+          mkdir release
+          tar -C docs/.vitepress -czf "release/typeyaml-docs-${RELEASE_TAG}.tar.gz" dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: release/*
+          if-no-files-found: error
+
+  github-release:
+    needs: [npm-package, native-cli, napi-bindings, wasm-package, vscode-extension, documentation]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: release }
+      - name: Produce checksums and a machine-readable manifest
+        shell: bash
+        run: |
+          find release -type f -print0 | sort -z | xargs -0 sha256sum > release/SHA256SUMS.txt
+          node <<'NODE'
+          const { createHash } = require('crypto');
+          const { readdirSync, readFileSync, writeFileSync } = require('fs');
+          const { join, relative } = require('path');
+          const root = 'release';
+          const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)]);
+          const artifacts = walk(root).filter((file) => !file.endsWith('SHA256SUMS.txt')).map((file) => {
+            const body = readFileSync(file);
+            return { path: relative(root, file).replaceAll('\\\\', '/'), bytes: body.length, sha256: createHash('sha256').update(body).digest('hex') };
+          });
+          writeFileSync(join(root, 'artifacts.json'), JSON.stringify({ version: process.env.RELEASE_TAG, artifacts }, null, 2) + '\\n');
+          NODE
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: release/**
+      - name: Create the GitHub Release and attach every artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            release/**
+          fail_on_unmatched_files: true
+
+  publish-npm:
+    needs: [github-release]
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, registry-url: https://registry.npmjs.org, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --access public --provenance

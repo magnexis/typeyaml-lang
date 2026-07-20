@@ -1,0 +1,7 @@
+- id: taml-check
+  name: TypeYAML Validation Check
+  description: Validates .taml files and ensures type constraints are met before committing.
+  entry: taml check
+  language: node
+  files: \.taml$
+  pass_filenames: true

@@ -1,0 +1,6 @@
+import { Deployment } from "std/k8s"
+
+component "payments" implements Deployment:
+  name: "payments"
+  image: "registry.example/payments:1.0"
+  replicas: 3

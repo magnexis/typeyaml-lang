@@ -1,0 +1,132 @@
+name: Native Core Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  build-napi:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            target: x86_64-pc-windows-msvc
+            package: win32-x64-msvc
+          - runner: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            package: linux-x64-gnu
+          - runner: macos-13
+            target: x86_64-apple-darwin
+            package: darwin-x64
+          - runner: macos-latest
+            target: aarch64-apple-darwin
+            package: darwin-arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: npm install
+        working-directory: crates/typeyaml-napi
+      - run: npx napi build --release --target ${{ matrix.target }} --platform
+        working-directory: crates/typeyaml-napi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.package }}
+          path: crates/typeyaml-napi/*.node
+
+  build-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: wasm32-unknown-unknown }
+      - uses: jetli/wasm-pack-action@v0.4.0
+      - run: wasm-pack build crates/typeyaml-wasm --target web --out-dir pkg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wasm
+          path: crates/typeyaml-wasm/pkg
+
+  build-linux-binaries:
+    strategy:
+      matrix:
+        target: [x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: taiki-e/install-action@cross
+      - run: cross build --release -p taml --target ${{ matrix.target }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: taml-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/taml
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: target/${{ matrix.target }}/release/taml
+
+  build-macos-binaries:
+    strategy:
+      matrix:
+        include:
+          - runner: macos-13
+            target: x86_64-apple-darwin
+          - runner: macos-latest
+            target: aarch64-apple-darwin
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: cargo build --release -p taml --target ${{ matrix.target }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: taml-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/taml
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: target/${{ matrix.target }}/release/taml
+
+  build-windows-binary:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: x86_64-pc-windows-msvc }
+      - run: cargo build --release -p taml --target x86_64-pc-windows-msvc
+      - uses: actions/upload-artifact@v4
+        with:
+          name: taml-x86_64-pc-windows-msvc
+          path: target/x86_64-pc-windows-msvc/release/taml.exe
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: target/x86_64-pc-windows-msvc/release/taml.exe
+
+  release-binaries:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build-linux-binaries, build-macos-binaries, build-windows-binary, build-wasm]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: release-artifacts }
+      - run: |
+          cd release-artifacts
+          find . -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS.txt
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            release-artifacts/**/*
+            release-artifacts/SHA256SUMS.txt

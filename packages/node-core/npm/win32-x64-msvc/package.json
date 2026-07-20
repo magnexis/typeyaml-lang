@@ -1,0 +1,1 @@
+{ "name": "@typeyaml/core-win32-x64-msvc", "version": "1.0.0", "os": ["win32"], "cpu": ["x64"], "main": "typeyaml.win32-x64-msvc.node", "files": ["typeyaml.win32-x64-msvc.node"] }

@@ -1,0 +1,3 @@
+enabled: true
+name: payments
+port: 8080

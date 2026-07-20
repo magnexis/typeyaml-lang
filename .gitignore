@@ -1,0 +1,34 @@
+# Node.js dependencies and generated package output
+node_modules/
+**/node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Rust build products
+target/
+**/*.pdb
+
+# Generated WebAssembly and N-API bindings
+crates/typeyaml-wasm/pkg/
+crates/typeyaml-napi/*.node
+
+# Generated VS Code packaging output (the release copy is intentionally tracked)
+vscode-extension/*.vsix
+editors/vscode/*.vsix
+.vscode-test/
+
+# Documentation development/build caches
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# Local tool state and operating-system files
+.taml/cache/
+.DS_Store
+Thumbs.db
+
+# Temporary/generated example output
+generated*/
+
+# The curated /release directory is intentionally NOT ignored: it contains
+# verified distributable artifacts, SHA256SUMS.txt, and artifacts.json.

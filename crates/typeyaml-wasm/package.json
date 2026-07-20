@@ -1,0 +1,8 @@
+{
+  "name": "@typeyaml/wasm",
+  "version": "1.0.0",
+  "description": "WebAssembly compiler core for typeYAML.",
+  "files": ["pkg"],
+  "scripts": { "build": "wasm-pack build --target web --out-dir pkg" },
+  "devDependencies": { "wasm-pack": "^0.13.1" }
+}

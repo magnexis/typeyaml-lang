@@ -1,0 +1,20 @@
+# Kubernetes resource schemas (flat MVP resource metadata)
+interface Deployment:
+  apiVersion: "apps/v1" = "apps/v1"
+  kind: "Deployment" = "Deployment"
+  name: String
+  replicas?: Int(min: 0) = 1
+  image: String
+
+interface Service:
+  apiVersion: "v1" = "v1"
+  kind: "Service" = "Service"
+  name: String
+  port: Int(min: 1, max: 65535)
+  targetPort?: Int(min: 1, max: 65535)
+
+interface Ingress:
+  apiVersion: "networking.k8s.io/v1" = "networking.k8s.io/v1"
+  kind: "Ingress" = "Ingress"
+  name: String
+  host: String(pattern: "^[A-Za-z0-9.-]+$")

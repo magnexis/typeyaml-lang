@@ -1,0 +1,14 @@
+{
+  "name": "@typeyaml/core",
+  "version": "1.0.0",
+  "private": true,
+  "description": "N-API loader for the typeYAML Rust core.",
+  "main": "./index.cjs",
+  "types": "./index.d.ts",
+  "optionalDependencies": {
+    "@typeyaml/core-darwin-arm64": "1.0.0",
+    "@typeyaml/core-darwin-x64": "1.0.0",
+    "@typeyaml/core-linux-x64-gnu": "1.0.0",
+    "@typeyaml/core-win32-x64-msvc": "1.0.0"
+  }
+}

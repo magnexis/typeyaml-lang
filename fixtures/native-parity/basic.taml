@@ -1,0 +1,9 @@
+interface Service:
+  name: String
+  port: Int(min: 1024, max: 65535)
+  enabled?: Boolean = true
+
+component api implements Service:
+  enabled: true
+  name: "payments"
+  port: 8080
