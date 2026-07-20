@@ -3,7 +3,7 @@
 Install typeYAML and create a starter project.
 
 ```sh
-npm install -g typeyaml
+npm install -g @magnexis/typeyaml
 ```
 
 With the native binary, the quickest setup is:

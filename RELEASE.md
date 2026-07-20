@@ -2,7 +2,7 @@
 
 The canonical release workflow is [Release TypeYAML](.github/workflows/release.yml). Push a protected, annotated `vX.Y.Z` tag whose version matches `package.json`, `vscode-extension/package.json`, and `crates/typeyaml-napi/package.json`.
 
-The workflow validates the version, tests and packs the SDK, builds standalone native CLIs, archives N-API bindings and the Wasm build, packages the VS Code extension, builds the documentation archive, creates SHA-256 checksums and `artifacts.json`, attests the release files, creates the GitHub Release, and publishes to npm with provenance.
+The workflow validates the version, tests and packs the `@magnexis/typeyaml` SDK, builds standalone native CLIs, archives N-API bindings and the Wasm build, packages the VS Code extension, builds the documentation archive, creates SHA-256 checksums and `artifacts.json`, attests the release files, creates the GitHub Release, and publishes to npm with provenance.
 
 Every GitHub Release includes:
 

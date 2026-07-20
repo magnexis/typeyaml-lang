@@ -1,10 +1,25 @@
 {
-  "name": "typeyaml",
+  "name": "@magnexis/typeyaml",
   "version": "1.0.0",
   "private": true,
-  "description": "typeYAML — Typed. Structured. Human. A typed compiler for YAML and JSON.",
+  "description": "The official typeYAML compiler, CLI, SDK, and typed configuration toolchain for YAML and JSON.",
   "type": "module",
   "files": ["dist", "assets/typeyaml-logo.png", "README.md"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magnexis/typeyaml-lang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/magnexis/typeyaml-lang/issues"
+  },
+  "homepage": "https://github.com/magnexis/typeyaml-lang#readme",
+  "keywords": ["typeyaml", "taml", "yaml", "json", "compiler", "configuration", "kubernetes", "devops"],
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

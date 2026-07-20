@@ -29,7 +29,7 @@ TypeYAML is a complete configuration toolchain, not a YAML runtime or a new depl
 | Language | Interfaces, scalar types, enums, defaults, constraints, inheritance, and imports | `.taml` files |
 | Compiler | Lexes, parses, validates, resolves imports, emits YAML/JSON, and writes source maps | `taml check` / `taml build` |
 | Native engine | Rust implementation for the standalone CLI, N-API bridge, and WebAssembly consumers | `cli-rust`, `crates/taml-core` |
-| SDK | Programmatic TypeScript API with automatic native/TypeScript engine selection | `import { compile } from "typeyaml"` |
+| SDK | Programmatic TypeScript API with automatic native/TypeScript engine selection | `import { compile } from "@magnexis/typeyaml"` |
 | Developer experience | Formatter, linter, source maps, LSP, VS Code syntax support, and project diagnostics | `taml fmt`, `taml lint`, `taml-lsp` |
 | Schema ecosystem | Built-in infrastructure schemas plus remote, locked, cached imports | `std/k8s`, `taml.lock` |
 | Delivery | Docs, tests, release workflows, package metadata, checksums, and attestations | `docs/`, `.github/workflows/` |
@@ -74,7 +74,7 @@ cargo build --release -p taml
 ./target/release/taml init my-service
 ```
 
-When the package is published, install the wrapper with `npm install -g typeyaml`. Tagged releases also build standalone native binaries for Linux x64/ARM64, macOS Intel/Apple Silicon, and Windows x64.
+When the package is published, install the wrapper with `npm install -g @magnexis/typeyaml`. Tagged releases also build standalone native binaries for Linux x64/ARM64, macOS Intel/Apple Silicon, and Windows x64.
 
 ## The everyday workflow
 
@@ -210,7 +210,7 @@ Run this before offline or release builds to ensure every locked schema exists l
 
 ## Editor support
 
-The VS Code extension in [vscode-extension](vscode-extension) provides `.taml` syntax highlighting and starts `taml-lsp` for diagnostics, completion, hover, definition lookup, local rename, and semantic tokens. Set `typeyaml.languageServer.path` when the native language server is not already on `PATH`. Package it with `cd vscode-extension && npm install && npm run package`; the prior [editors/vscode](editors/vscode) location remains available for compatibility.
+Install the official [TypeYAML VS Code extension](https://marketplace.visualstudio.com/manage/publishers/magnificent-language/extensions/typeyaml-vscode/hub) for `.taml` syntax highlighting and `taml-lsp` integration, including diagnostics, completion, hover, definition lookup, local rename, and semantic tokens. Set `typeyaml.languageServer.path` when the native language server is not already on `PATH`. The extension source lives in [vscode-extension](vscode-extension); package a development VSIX with `cd vscode-extension && npm install && npm run package`. The prior [editors/vscode](editors/vscode) location remains available for compatibility.
 
 The LSP speaks standard stdio JSON-RPC, so it can also be configured in Neovim, Zed, Helix, and other LSP-compatible editors.
 
@@ -222,7 +222,7 @@ import {
   compile,
   parseAST,
   nativeEngineStatus
-} from "typeyaml";
+} from "@magnexis/typeyaml";
 
 const ast = parseAST(source);
 const checked = check(source);

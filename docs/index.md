@@ -19,7 +19,7 @@ hero:
 ## Compile safety into your configuration
 
 ```sh
-npm install -g typeyaml
+npm install -g @magnexis/typeyaml
 ```
 
 | typeYAML source | Compiled YAML |
