@@ -133,9 +133,11 @@ mod tests {
             header: false,
         });
         assert!(result.valid, "{:?}", result.diagnostics);
+        let expected = include_str!("../../../fixtures/native-parity/basic.yaml")
+            .replace("\r\n", "\n");
         assert_eq!(
             result.components[0].output,
-            include_str!("../../../fixtures/native-parity/basic.yaml")
+            expected
         );
     }
     #[test]
