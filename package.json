@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "description": "The official typeYAML compiler, CLI, SDK, and typed configuration toolchain for YAML and JSON.",
+  "license": "SEE LICENSE IN LICENSE",
   "type": "module",
   "files": ["bin", "dist", "assets/typeyaml-logo.png", "README.md", "LICENSE"],
   "repository": {

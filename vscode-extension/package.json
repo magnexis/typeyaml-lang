@@ -4,14 +4,14 @@
   "description": "Language support for typed YAML (.taml): highlighting, diagnostics, completion, and navigation.",
   "version": "1.0.0",
   "publisher": "magnificent-language",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "https://github.com/typeyaml/typeyaml.git"
+    "url": "https://github.com/magnexis/typeyaml-lang.git"
   },
-  "homepage": "https://github.com/typeyaml/typeyaml#readme",
+  "homepage": "https://github.com/magnexis/typeyaml-lang#readme",
   "bugs": {
-    "url": "https://github.com/typeyaml/typeyaml/issues"
+    "url": "https://github.com/magnexis/typeyaml-lang/issues"
   },
   "main": "./extension.cjs",
   "engines": {

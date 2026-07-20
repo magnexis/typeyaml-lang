@@ -1,21 +1,41 @@
-MIT License
+Magnexis Use-Only Software License
 
-Copyright (c) 2026 typeYAML contributors
+Copyright (c) 2026 Magnexis. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Grant of use
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Subject to this license, Magnexis grants you a limited, non-exclusive,
+non-transferable, non-sublicensable, revocable license to install and use
+unmodified copies of this software solely for its intended purposes.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. Restrictions
+
+Except to the extent a restriction is prohibited by applicable law, you may
+not modify, adapt, translate, reverse engineer, decompile, disassemble,
+create derivative works from, redistribute, publish, sublicense, sell, rent,
+lease, lend, or otherwise make the software or any modified version available
+to another person or entity. You may make only the copies technically required
+to install, execute, and use an unmodified copy of the software.
+
+3. Ownership
+
+Magnexis and its licensors retain all right, title, and interest in and to the
+software, including all intellectual-property rights. This license grants only
+the limited right of use expressly stated above; no ownership or other rights
+are transferred.
+
+4. Termination
+
+This license terminates automatically if you violate any term of it. On
+termination, you must stop using and destroy all copies of the software in your
+possession or control.
+
+5. Disclaimer and limitation of liability
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OF
+ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY. TO THE MAXIMUM EXTENT
+PERMITTED BY LAW, MAGNEXIS DISCLAIMS ALL WARRANTIES, INCLUDING WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND
+NON-INFRINGEMENT. TO THE MAXIMUM EXTENT PERMITTED BY LAW, MAGNEXIS WILL NOT
+BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR
+PUNITIVE DAMAGES, OR FOR ANY LOSS OF DATA, PROFITS, OR BUSINESS.

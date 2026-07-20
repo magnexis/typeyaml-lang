@@ -12,5 +12,5 @@ resolver = "2"
 [workspace.package]
 version = "1.0.0"
 edition = "2024"
-license = "MIT"
-repository = "https://github.com/typeyaml/typeyaml"
+license = "LicenseRef-Magnexis-Use-Only"
+repository = "https://github.com/magnexis/typeyaml-lang"

@@ -8,7 +8,7 @@ export default defineConfig({
   themeConfig: {
     logo: "/typeyaml-logo.png",
     nav: [{ text: "Guide", link: "/guide/getting-started" }, { text: "Language spec", link: "/guide/spec" }, { text: "Standard library", link: "/guide/standard-library" }, { text: "CLI", link: "/guide/cli" }],
-    sidebar: { "/guide/": [{ text: "Getting Started", items: [{ text: "Getting started", link: "/guide/getting-started" }, { text: "Language specification", link: "/guide/spec" }, { text: "Standard library", link: "/guide/standard-library" }, { text: "CLI guide", link: "/guide/cli" }, { text: "Native engine", link: "/guide/native-engine" }, { text: "IDE and registry", link: "/guide/ide" }, { text: "Contributing", link: "/guide/contributing" }] }] },
-    socialLinks: [{ icon: "github", link: "https://github.com/typeyaml/typeyaml" }]
+    sidebar: { "/guide/": [{ text: "Getting Started", items: [{ text: "Getting started", link: "/guide/getting-started" }, { text: "Language specification", link: "/guide/spec" }, { text: "Standard library", link: "/guide/standard-library" }, { text: "CLI guide", link: "/guide/cli" }, { text: "Native engine", link: "/guide/native-engine" }, { text: "IDE and registry", link: "/guide/ide" }, { text: "Support and release policy", link: "/guide/contributing" }] }] },
+    socialLinks: [{ icon: "github", link: "https://github.com/magnexis/typeyaml-lang" }]
   }
 });

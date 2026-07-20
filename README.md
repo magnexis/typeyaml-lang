@@ -9,7 +9,7 @@
   <img src="assets/badges/status.svg" alt="Project status: active">
   <img src="assets/badges/native.svg" alt="Native engine: Rust and Wasm">
   <a href="docs/index.md"><img src="assets/badges/docs.svg" alt="Documentation: VitePress"></a>
-  <a href="LICENSE"><img src="assets/badges/license.svg" alt="MIT license"></a>
+  <a href="LICENSE"><img src="assets/badges/license.svg" alt="Magnexis use-only license"></a>
 </p>
 
 # typeYAML
@@ -19,6 +19,8 @@ typeYAML (`.taml`, CLI: `taml`, symbol: 🦣) is a compile-time language for rel
 It has no deployment runtime. Your Kubernetes cluster, CI provider, Terraform workflow, or other consumer receives normal YAML/JSON; typeYAML catches configuration mistakes before those systems do.
 
 **Documentation:** [Getting started](docs/guide/getting-started.md) · [Language specification](docs/guide/spec.md) · [CLI guide](docs/guide/cli.md) · [IDE and registry](docs/guide/ide.md) · [Native engine](docs/guide/native-engine.md)
+
+**Official npm package:** [@magnexis/typeyaml](https://www.npmjs.com/package/@magnexis/typeyaml)
 
 ## Project at a glance
 
@@ -264,14 +266,16 @@ On the included native benchmark fixture, the release CLI measured a 4.004 ms me
 
 Tagged releases are assembled by one canonical [release workflow](.github/workflows/release.yml). It publishes the Node package and attaches all native CLI, N-API, Wasm, VS Code, documentation, checksum, manifest, and provenance artifacts to the GitHub Release. See [RELEASE.md](RELEASE.md) for the exact artifact inventory and verification procedure.
 
-Registry host policy, immutable GitHub revisions, checksums, provenance attestations, and scheduled parser fuzzing are included. Review [the contribution and release guide](docs/guide/contributing.md) before publishing a release.
+Registry host policy, immutable GitHub revisions, checksums, provenance attestations, and scheduled parser fuzzing are included. Review the [support and release policy](docs/guide/contributing.md) before publishing a release.
 
 ## Repository map
 
 See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the complete directory layout.
 
-## Status and contributing
+## Status and support
 
 typeYAML is actively evolving. The scalar typed-configuration workflow, native CLI, formatter/linter, registry locking, source maps, LSP, and standard schemas are implemented. Broader nested-manifest parity, release-install smoke testing, and additional IDE refactors are the next areas of investment.
 
-Contributions are welcome under the [MIT License](LICENSE).
+Magnexis does not accept external code contributions or pull requests. For bugs, security concerns, documentation problems, or feature requests, please [open an issue](https://github.com/magnexis/typeyaml-lang/issues) with a reproducible example and your TypeYAML version.
+
+Use is governed by the [Magnexis Use-Only Software License](LICENSE). The software may be used in unmodified form; modification, redistribution, sublicensing, and derivative works are not permitted.

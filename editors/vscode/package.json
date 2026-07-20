@@ -4,6 +4,7 @@
   "description": "Syntax highlighting for typeYAML (.taml) files.",
   "version": "1.0.0",
   "publisher": "typeyaml",
+  "license": "SEE LICENSE IN LICENSE",
   "main": "./extension.cjs",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Programming Languages"],
