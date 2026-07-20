@@ -1,7 +1,7 @@
 {
   "name": "@magnexis/typeyaml",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "The official typeYAML compiler, CLI, SDK, and typed configuration toolchain for YAML and JSON.",
   "type": "module",
   "files": ["dist", "assets/typeyaml-logo.png", "README.md"],
