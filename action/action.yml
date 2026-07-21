@@ -11,7 +11,15 @@ runs:
     - uses: dtolnay/rust-toolchain@stable
     - shell: bash
       run: |
-        cargo install --path "$GITHUB_ACTION_PATH/../cli-rust" --root "$RUNNER_TEMP/typeyaml"
+        cd "$GITHUB_ACTION_PATH/.."
+        cargo build --release -p taml
+        mkdir -p "$RUNNER_TEMP/typeyaml/bin"
+        # Copy the binary (taml on Unix, taml.exe on Windows)
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          cp target/release/taml.exe "$RUNNER_TEMP/typeyaml/bin/"
+        else
+          cp target/release/taml "$RUNNER_TEMP/typeyaml/bin/"
+        fi
         echo "$RUNNER_TEMP/typeyaml/bin" >> "$GITHUB_PATH"
     - shell: bash
       run: |
